@@ -11,10 +11,15 @@ function init() {
 	createLights()
 	createSea()
 	createSky()
+	createAirplane()
 }
 
 function render() {
 	requestAnimationFrame(render)
+
+	airplane.propeller.rotation.x += 0.3
+	sea.mesh.rotation.z += 0.005
+	sky.mesh.rotation.z += 0.01
 
 	renderer.render(scene, camera)
 }
@@ -40,8 +45,8 @@ function createLights() {
 	shadowLight.shadow.camera.bottom = -400
 	shadowLight.shadow.camera.near = 1
 	shadowLight.shadow.camera.far = 1000
-	shadowLight.shadow.mapSize.width = 2048;
-	shadowLight.shadow.mapSize.height = 2048;
+	shadowLight.shadow.mapSize.width = 2048
+	shadowLight.shadow.mapSize.height = 2048
 	scene.add(hemisphereLight)
 	scene.add(shadowLight)
 }
@@ -109,4 +114,92 @@ function createSky() {
 	sky = new Sky()
 	sky.mesh.position.y = -600
 	scene.add(sky.mesh)
+}
+
+function Airplane() {
+  this.mesh = new THREE.Object3D()
+
+  // cockpit
+  let gCockpit = new THREE.BoxGeometry(60, 50, 50)
+  let mCockpit = new THREE.MeshPhongMaterial({
+  	color: 0x00cc88,
+  	flatShading: true
+  })
+  let cockpit = new THREE.Mesh(gCockpit, mCockpit)
+  cockpit.castShadow = true
+  cockpit.receiveShadow = true
+  this.mesh.add(cockpit)
+
+  // engine
+  let gEngine = new THREE.BoxGeometry(20, 50, 50)
+  let mEngine = new THREE.MeshPhongMaterial({
+  	color: 0xffffff,
+  	flatShading: true
+  })
+  let engine = new THREE.Mesh(gEngine, mEngine)
+  engine.position.x = 40
+  engine.castShadow = true
+  engine.receiveShadow = true
+  this.mesh.add(engine)
+
+  // tail
+  let gTail = new THREE.BoxGeometry(20, 20, 10)
+  let mTail = new THREE.MeshPhongMaterial({
+  	color: 0xffffff,
+  	flatShading: true
+  })
+  let tail = new THREE.Mesh(gTail, mTail)
+  tail.position.set(-35, 25, 0)
+  tail.castShadow = true
+  tail.receiveShadow = true
+  this.mesh.add(tail)
+
+  // top and bottom wings
+  let gWing = new THREE.BoxGeometry(40, 10, 120)
+  let mWing = new THREE.MeshPhongMaterial({
+  	color: 0x00aaff,
+  	flatShading: true
+  })
+  let topWing = new THREE.Mesh(gWing, mWing)
+  let botWing = new THREE.Mesh(gWing, mWing)
+  topWing.castShadow = true
+  topWing.receiveShadow = true
+  topWing.position.set(10, 20, 0)
+  botWing.castShadow = true
+  botWing.receiveShadow = true
+  botWing.position.set(10, -20, 0)
+  this.mesh.add(topWing)
+  this.mesh.add(botWing)
+
+  // propeller
+	let gPropeller = new THREE.BoxGeometry(20, 10, 10)
+	let mPropeller = new THREE.MeshPhongMaterial({
+		color: 0xff5555, 
+		flatShading: true
+	})
+	this.propeller = new THREE.Mesh(gPropeller, mPropeller)
+	this.propeller.castShadow = true
+	this.propeller.receiveShadow = true
+
+	// blades
+	let gBlade = new THREE.BoxGeometry(1, 100, 20)
+	let mBlade = new THREE.MeshPhongMaterial({
+		color: 0x00cc88,
+		flatShading: true
+	})
+	let blade = new THREE.Mesh(gBlade, mBlade)
+	blade.position.set(8, 0, 0)
+	blade.castShadow = true
+	blade.receiveShadow = true
+
+	this.propeller.add(blade)
+	this.propeller.position.set(50, 0, 0)
+	this.mesh.add(this.propeller)
+}
+
+function createAirplane() {
+	airplane = new Airplane()
+	airplane.mesh.scale.set(0.25, 0.25, 0.25)
+	airplane.mesh.position.y = 200
+	scene.add(airplane.mesh)
 }
