@@ -22,7 +22,7 @@ function render() {
 function createScene() {
 	scene = new THREE.Scene()
 	camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 1, 10000)
-	camera.position.set(0, 200, 100)
+	camera.position.set(0, 200, 200)
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
 	renderer.setSize(innerWidth, innerHeight)
 	renderer.shadowMap.enabled = true
@@ -74,12 +74,12 @@ function Cloud() {
 	let nBlocks = Math.floor(Math.random() * 3) + 3
 	for (let i = 0; i < nBlocks; ++i) {
 		let m = new THREE.Mesh(geom, mat)
-		m.position.x = i * 20
-		m.position.y = Math.round(Math.random() * 10)
-		m.position.z = Math.round(Math.random() * 10)
+		m.position.x = i * 15
+		m.position.y = 5 + Math.random() * 5
+		m.position.z = 5 + Math.random() * 5
 		m.rotation.z = Math.random() * Math.PI * 2
 		m.rotation.y = Math.random() * Math.PI * 2
-		let s = 0.1 + Math.random() * 0.9
+		let s = Math.random() * 0.7 + 0.3
 		m.scale.set(s, s, s)
 		m.castShadow = true
 		m.receiveShadow = true
