@@ -27,7 +27,7 @@ function render() {
 function createScene() {
 	scene = new THREE.Scene()
 	camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 1, 10000)
-	camera.position.set(0, 200, 200)
+	camera.position.set(0, 100, 200)
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
 	renderer.setSize(innerWidth, innerHeight)
 	renderer.shadowMap.enabled = true
@@ -102,7 +102,7 @@ function Sky() {
 		let h = 750 + Math.random() * 200
 		c.mesh.position.x = Math.cos(a) * h
 		c.mesh.position.y = Math.sin(a) * h
-		c.mesh.position.z = -400 - Math.random() * 400
+		c.mesh.position.z = - Math.random() * 400
 		c.mesh.rotation.z = a + Math.PI / 2
 		let s = Math.round(Math.random() * 3)
 		c.mesh.scale.set(s, s, s)
@@ -200,6 +200,6 @@ function Airplane() {
 function createAirplane() {
 	airplane = new Airplane()
 	airplane.mesh.scale.set(0.25, 0.25, 0.25)
-	airplane.mesh.position.y = 200
+	airplane.mesh.position.y = 100
 	scene.add(airplane.mesh)
 }
