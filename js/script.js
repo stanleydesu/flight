@@ -1,7 +1,9 @@
+"use strict"
 let scene, camera, renderer
 let hemisphereLight, shadowLight
 let sea
 let sky
+let airplane
 
 init()
 render()
@@ -76,7 +78,7 @@ function Cloud() {
 	let mat = new THREE.MeshPhongMaterial({
 		color: 0xffffff,
 		transparent: true,
-		opacity: 0.3,
+		opacity: 0.5,
 		flatShading: true
 	})
 	let nBlocks = Math.floor(Math.random() * 3) + 3
@@ -204,5 +206,6 @@ function createAirplane() {
 	airplane = new Airplane()
 	airplane.mesh.scale.set(0.25, 0.25, 0.25)
 	airplane.mesh.position.y = 100
+	airplane.mesh.position.z = -100
 	scene.add(airplane.mesh)
 }
