@@ -74,7 +74,10 @@ function Cloud() {
 	this.mesh = new THREE.Object3D()
 	let geom = new THREE.BoxGeometry(20, 20, 20)
 	let mat = new THREE.MeshPhongMaterial({
-		color: 0xdddddd
+		color: 0xffffff,
+		transparent: true,
+		opacity: 0.3,
+		flatShading: true
 	})
 	let nBlocks = Math.floor(Math.random() * 3) + 3
 	for (let i = 0; i < nBlocks; ++i) {
@@ -102,7 +105,7 @@ function Sky() {
 		let h = 750 + Math.random() * 200
 		c.mesh.position.x = Math.cos(a) * h
 		c.mesh.position.y = Math.sin(a) * h
-		c.mesh.position.z = - Math.random() * 400
+		c.mesh.position.z = - Math.random() * 600
 		c.mesh.rotation.z = a + Math.PI / 2
 		let s = Math.round(Math.random() * 3)
 		c.mesh.scale.set(s, s, s)
