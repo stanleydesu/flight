@@ -1,32 +1,32 @@
 /*
  * exports all objects in an array, containing:
  * 	lights
- * 	sea
+ * 	earth
  *  sky
  *  airplane
  */
 
-let sea, cloud, sky, airplane
+let earth, cloud, sky, airplane
 
-// sea
-sea = (function() {
-	let sea
+// earth
+earth = (function() {
+	let earth
 	let geometry = new THREE.CylinderGeometry(600, 600, 800, 40, 10)
-	geometry.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI/2))
+	geometry.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 2))
 	let material = new THREE.MeshPhongMaterial({
-		color: 0x00ccff,
+		color: 0x00cc33,
 		transparent: true,
 		opacity: 0.6,
 		flatShading: true
 	})
-	sea = new THREE.Mesh(geometry, material)
-	sea.receiveShadow = true
-	sea.position.y = -600
-	sea.update = function() {
+	earth = new THREE.Mesh(geometry, material)
+	earth.receiveShadow = true
+	earth.position.y = -600
+	earth.update = function() {
 		this.rotation.z += 0.005
 	}
 
-	return sea
+	return earth
 })()
 
 // cloud function (for populating the sky)
@@ -176,4 +176,4 @@ airplane = (function() {
 	return airplane
 })()
 
-const objectArray = [sea, sky, airplane]
+const objectArray = [earth, sky, airplane]
