@@ -1,38 +1,37 @@
 function SceneManager(canvas) {
-	const screenDimensions = {
-		width: canvas.width,
-		height: canvas.height
-	}
+  const screenDimensions = {
+    width: canvas.width,
+    height: canvas.height
+  }
 
-	const lights = lightArray
-	const objects = objectArray
-	console.log(lights)
+  const lights = lightArray
+  const objects = objectArray
 
-	const scene = buildScene()
-	const camera = buildCamera(screenDimensions)
-	const renderer = buildRenderer(screenDimensions)
+  const scene = buildScene()
+  const camera = buildCamera(screenDimensions)
+  const renderer = buildRenderer(screenDimensions)
 
-	function buildScene() {
-		const scene = new THREE.Scene()
-		lights.forEach(light => scene.add(light))
-		objects.forEach(obj => scene.add(obj))
+  function buildScene() {
+    const scene = new THREE.Scene()
+    lights.forEach(light => scene.add(light))
+    objects.forEach(obj => scene.add(obj))
 
-		return scene
-	}
+    return scene
+  }
 
-	function buildCamera({ width, height }) {
-		const fieldOfView = 60
-	  const aspectRatio = width / height
-	  const nearPlane = 1
-	  const farPlane = 10000
-	  const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane)
-	  camera.position.set(0, 100, 200)
+  function buildCamera({ width, height }) {
+    const fieldOfView = 60
+    const aspectRatio = width / height
+    const nearPlane = 1
+    const farPlane = 10000
+    const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane)
+    camera.position.set(0, 100, 200)
 
-	  return camera
-	}
+    return camera
+  }
 
 
-	function buildRenderer({ width, height }) {
+  function buildRenderer({ width, height }) {
     const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }) 
     const DPR = (window.devicePixelRatio) ? window.devicePixelRatio : 1
     renderer.setPixelRatio(DPR)
@@ -40,28 +39,28 @@ function SceneManager(canvas) {
     renderer.shadowMap.enabled = true
 
     return renderer
-	}
+  }
 
-	this.update = function() {
-		objects.forEach(obj => obj.update())
+  this.update = function() {
+    objects.forEach(obj => obj.update())
 
-		renderer.render(scene, camera)
-	}
+    renderer.render(scene, camera)
+  }
 
-	this.handleWindowResize = function() {
-		canvas.style.width = '100%'
-		canvas.style.height = '100%'
-		canvas.width = canvas.offsetWidth
-		canvas.height = canvas.offsetHeight
+  this.handleWindowResize = function() {
+    canvas.style.width = '100%'
+    canvas.style.height = '100%'
+    canvas.width = canvas.offsetWidth
+    canvas.height = canvas.offsetHeight
 
-		const { width, height } = canvas
+    const { width, height } = canvas
 
-		screenDimensions.width = width
-		screenDimensions.height = height
+    screenDimensions.width = width
+    screenDimensions.height = height
 
-		camera.aspect = width / height
-		camera.updateProjectionMatrix()
+    camera.aspect = width / height
+    camera.updateProjectionMatrix()
 
-		renderer.setSize(width, height)
-	}
+    renderer.setSize(width, height)
+  }
 }
