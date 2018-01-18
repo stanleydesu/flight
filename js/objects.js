@@ -70,7 +70,7 @@ sky = (function() {
 		c.position.y = Math.sin(angle) * height
 		c.position.z = - Math.random() * 600
 		c.rotation.z = angle + Math.PI / 2
-		let s = Math.round(Math.random() * 3)
+		let s = 1 + Math.random() * 2
 		c.scale.set(s, s, s)
 		sky.add(c)
 	}
