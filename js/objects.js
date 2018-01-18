@@ -11,17 +11,14 @@ let sea, cloud, sky, airplane
 // sea
 sea = (function() {
 	let sea
-	let geometry = new THREE.CylinderGeometry(600, 600, 800, 40, 10)
+	let geometry = new THREE.SphereGeometry(2000, 30, 30)
 	geometry.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 2))
 	let material = new THREE.MeshPhongMaterial({
 		color: 0x00aaff,
-		transparent: true,
-		opacity: 0.6,
 		flatShading: true
 	})
 	sea = new THREE.Mesh(geometry, material)
 	sea.receiveShadow = true
-	sea.position.y = -600
 	sea.update = function() {
 		this.rotation.z += 0.005
 	}
@@ -65,18 +62,17 @@ sky = (function() {
 	for (let i = 0; i < numClouds; ++i) {
 		let c = new Cloud()
 		let angle = stepAngle * i
-		let height = 750 + Math.random() * 200
+		let height = 2050 + Math.random() * 200
 		c.position.x = Math.cos(angle) * height
 		c.position.y = Math.sin(angle) * height
-		c.position.z = -300 + Math.random() * 600
+		c.position.z = -400 + Math.random() * 800
 		c.rotation.z = angle + Math.PI / 2
 		let s = 1 + Math.random() * 2
 		c.scale.set(s, s, s)
 		sky.add(c)
 	}
-	sky.position.y = -600
 	sky.update = function() {
-		this.rotation.z += 0.01
+		this.rotation.z += 0.005
 	}
 
 	return sky
@@ -166,7 +162,7 @@ airplane = (function() {
 	airplane.add(airplane.propeller)
 
 	airplane.scale.set(0.25, 0.25, 0.25)
-	airplane.position.set(0, 100, 0)
+	airplane.position.set(0, 2050, 0)
 
 	airplane.update = function() {
 		this.propeller.rotation.x += 0.3
