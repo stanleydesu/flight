@@ -5,7 +5,7 @@
  */
 
 // hemisphereLight
-const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x00aaff, 1)
+const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x55aaff, 1)
 
 // shadowLight
 const shadowLight = new THREE.DirectionalLight(0xffffff, 0.8)
