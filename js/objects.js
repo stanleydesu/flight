@@ -1,32 +1,32 @@
 /*
  * exports all objects in an array, containing:
  * 	lights
- * 	earth
+ * 	sea
  *  sky
  *  airplane
  */
 
-let earth, cloud, sky, airplane
+let sea, cloud, sky, airplane
 
-// earth
-earth = (function() {
-	let earth
+// sea
+sea = (function() {
+	let sea
 	let geometry = new THREE.CylinderGeometry(600, 600, 800, 40, 10)
 	geometry.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 2))
 	let material = new THREE.MeshPhongMaterial({
-		color: 0x00cc33,
+		color: 0x00aaff,
 		transparent: true,
 		opacity: 0.6,
 		flatShading: true
 	})
-	earth = new THREE.Mesh(geometry, material)
-	earth.receiveShadow = true
-	earth.position.y = -600
-	earth.update = function() {
+	sea = new THREE.Mesh(geometry, material)
+	sea.receiveShadow = true
+	sea.position.y = -600
+	sea.update = function() {
 		this.rotation.z += 0.005
 	}
 
-	return earth
+	return sea
 })()
 
 // cloud function (for populating the sky)
@@ -68,7 +68,7 @@ sky = (function() {
 		let height = 750 + Math.random() * 200
 		c.position.x = Math.cos(angle) * height
 		c.position.y = Math.sin(angle) * height
-		c.position.z = - Math.random() * 600
+		c.position.z = -300 + Math.random() * 600
 		c.rotation.z = angle + Math.PI / 2
 		let s = 1 + Math.random() * 2
 		c.scale.set(s, s, s)
@@ -89,7 +89,7 @@ airplane = (function() {
   // cockpit
   let gCockpit = new THREE.BoxGeometry(60, 50, 50)
   let mCockpit = new THREE.MeshPhongMaterial({
-  	color: 0x00cc88,
+  	color: 0xff4c4c,
   	flatShading: true
   })
   let cockpit = new THREE.Mesh(gCockpit, mCockpit)
@@ -124,7 +124,7 @@ airplane = (function() {
   // top and bottom wings
   let gWing = new THREE.BoxGeometry(40, 10, 120)
   let mWing = new THREE.MeshPhongMaterial({
-  	color: 0x00aaff,
+  	color: 0xff4c4c,
   	flatShading: true
   })
   let topWing = new THREE.Mesh(gWing, mWing)
@@ -151,7 +151,7 @@ airplane = (function() {
 	// blades
 	let gBlade = new THREE.BoxGeometry(1, 100, 20)
 	let mBlade = new THREE.MeshPhongMaterial({
-		color: 0x00cc88,
+		color: 0xff4c4c,
 		flatShading: true
 	})
 	let blade = new THREE.Mesh(gBlade, mBlade)
@@ -166,8 +166,7 @@ airplane = (function() {
 	airplane.add(airplane.propeller)
 
 	airplane.scale.set(0.25, 0.25, 0.25)
-	airplane.position.y = 100
-	airplane.position.z = -100
+	airplane.position.set(0, 100, 0)
 
 	airplane.update = function() {
 		this.propeller.rotation.x += 0.3
@@ -176,4 +175,4 @@ airplane = (function() {
 	return airplane
 })()
 
-const objectArray = [earth, sky, airplane]
+const objectArray = [sea, sky, airplane]
