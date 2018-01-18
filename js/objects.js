@@ -36,7 +36,7 @@ function Cloud() {
 	let material = new THREE.MeshPhongMaterial({
 		color: 0xffffff,
 		transparent: true,
-		opacity: 0.5,
+		opacity: 0.8,
 		flatShading: true
 	})
 	let numBlocks = Math.floor(Math.random() * 3) + 3
