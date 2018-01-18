@@ -25,8 +25,8 @@ function SceneManager(canvas) {
     const nearPlane = 1
     const farPlane = 10000
     const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane)
-    camera.position.set(-200, 250, 0)
-    camera.lookAt(new THREE.Vector3(0, 100, 0))
+    camera.position.set(-250, 2100, 0)
+    camera.lookAt(new THREE.Vector3(0, 2100, 0))
 
     return camera
   }
