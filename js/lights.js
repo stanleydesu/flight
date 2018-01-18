@@ -1,14 +1,14 @@
 /*
  * exports all lights in an array, containing:
- * 	hemisphereLight
- *  shadowLight
+ * hemisphereLight
+ * shadowLight
  */
 
 // hemisphereLight
-hemisphereLight = new THREE.HemisphereLight(0x00cc88, 0x00aaff, 0.9)
+const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x00aaff, 1)
 
 // shadowLight
-shadowLight = new THREE.DirectionalLight(0xffffff, 0.9)
+const shadowLight = new THREE.DirectionalLight(0xffffff, 0.8)
 shadowLight.position.set(150, 350, 350)
 shadowLight.castShadow = true
 shadowLight.shadow.camera.left = -400
