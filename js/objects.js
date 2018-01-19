@@ -22,7 +22,7 @@ sea = (function() {
 	sea.update = function() {
 		this.rotation.z += 0.005
 	}
-
+	sea.name = 'sea'
 	return sea
 })()
 
@@ -74,6 +74,7 @@ sky = (function() {
 	sky.update = function() {
 		this.rotation.z += 0.005
 	}
+	sky.name = 'sky'
 
 	return sky
 })()
@@ -167,6 +168,7 @@ airplane = (function() {
 	airplane.update = function() {
 		this.propeller.rotation.x += 0.3
 	}
+	airplane.name = 'airplane'
 
 	return airplane
 })()
